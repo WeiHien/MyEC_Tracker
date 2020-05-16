@@ -1,6 +1,6 @@
 # CoronaJob
 
-### To run directly from GitHub:
+## To run directly from GitHub:
 ```R
 # R console
 library(shiny)
@@ -8,7 +8,7 @@ library(shiny)
 runGitHub( "coronajob", "WeiHien")
 ```
 
-### To run locally and contribute:
+## To run locally and contribute:
 - Clone the repo
 ```
 git clone https://github.com/WeiHien/coronajob.git
@@ -42,14 +42,20 @@ git push --set-upstream origin {BRANCH_NAME}
 - Go to GitHub and click "Pull Request". Select your branch and create.
 - Pull Request must be approved by any other collaborator before it is merged into master branch.
 
-### Code Structure
-Each pages is separated into different files.
+## Code Structure
+Each pages is separated into different file inside modules directory.
+
+To add new page (eg Job page):
+- Load the module (file) in app.R
+```R
+source("modules/jobs.R")
+```
 
 - For UI part of pages, register on app.R
 ```R
 ui <- navbarPage(
   ...
-  tabPanel("Home", homeUI(id = "home")),
+  tabPanel("Jobs", jobsUI(id = "jobs")),
 )
 ```
 
