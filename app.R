@@ -7,6 +7,8 @@ source("modules/finance.R")
 
 # Define UI ----
 ui <- navbarPage(
+    theme = "css/bootstrap.min.css",
+    inverse = TRUE,
     title = div(
         icon("briefcase"),
         "CoronaJob"
