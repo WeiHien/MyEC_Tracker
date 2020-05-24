@@ -4,6 +4,7 @@ library(shiny)
 source("modules/home.R")
 source("modules/jobs.R")
 source("modules/finance.R")
+source("modules/about-us.R")
 
 # Define UI ----
 ui <- navbarPage(
@@ -26,7 +27,7 @@ ui <- navbarPage(
 
     # Other pages ----
     navbarMenu("More",
-        tabPanel("Subsection 1"),
+        tabPanel("About Us", aboutUsUI(id = "about-us")),
         "----",
         "Subsection header",
         tabPanel("Subsection 2")
