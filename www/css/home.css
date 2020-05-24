@@ -5,6 +5,7 @@
     margin-bottom: 0;
     border-radius: 0;
     margin-top: -21px;
+    z-index: 0;
     position: relative;
 }
 
@@ -16,6 +17,7 @@
     left: 0;
     top: 0;
     opacity: 0.5;
+    z-index: -1;
     background-size: cover;
     background: url(../images/main-background.jpg) no-repeat center center fixed;
 }
