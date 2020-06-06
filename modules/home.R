@@ -10,7 +10,7 @@ homeUI <- function(id) {
             ),
 
             h1(class = "text-center", "CoronaJob"),
-            h3(class = "text-center", "An analysis on economic impact of COVID-19 towards Malaysia and neighouring countries"),
+            h3(class = "text-center", "An analysis on economic & financial impacts of COVID-19 towards Malaysia"),
 
             div(class = "row mt-16",
                 div(class = "col-md-4",

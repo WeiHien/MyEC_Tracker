@@ -18,8 +18,8 @@
     top: 0;
     opacity: 0.5;
     z-index: -1;
-    background-size: cover;
     background: url(../images/main-background.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 
 .jumbotron h1 {
