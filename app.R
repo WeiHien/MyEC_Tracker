@@ -24,7 +24,7 @@ ui <- navbarPage(
     tabPanel("Jobs", jobsUI(id = "jobs")),
 
     # Page 2 ----
-    tabPanel("Finance", financeUI(id = "finance")),
+    tabPanel("Economy", financeUI(id = "finance")),
 
     # Page 3 ----
     tabPanel("Stocks", stocksUI(id = "stocks")),
