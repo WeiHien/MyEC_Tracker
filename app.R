@@ -6,6 +6,7 @@ source("modules/jobs.R")
 source("modules/finance.R")
 source("modules/stocks.R")
 source("modules/about-us.R")
+source("modules/about-project.R")
 
 # Define UI ----
 ui <- navbarPage(
@@ -31,10 +32,11 @@ ui <- navbarPage(
 
     # Other pages ----
     navbarMenu("More",
-        tabPanel("About Us", aboutUsUI(id = "about-us")),
+        "About Project",
+        tabPanel("Motivation", aboutProjectUI(id = "about-project")),
         "----",
-        "Subsection header",
-        tabPanel("Subsection 2")
+        "About Us",
+        tabPanel("Group A", aboutUsUI(id = "about-us"))
     )
 )
 
