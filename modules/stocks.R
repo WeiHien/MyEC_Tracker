@@ -6,13 +6,20 @@ stocksUI <- function(id) {
     ns <- NS(id)
     
     fluidPage(
-        h1(textOutput(ns("title"))),
+        h1("Impact on Stocks"),
+        p(class = "lead",
+            "Let's look at the impact on Malaysia stock market. As shown by red line in the charts, we'll use the MCO date (2020-03-18) as reference point, which 
+            represents the period when the covid-19 started getting severe and impacting business.",
+        ),
+        br(),
+        p("Drag the slider to select the period range :"),
+        br(),
+
         chooseSliderSkin("Flat"),
         sliderTextInput(
             ns("period"),
             label = NULL,
             choices = c(
-                "1 year before MCO",
                 "6 months before MCO",
                 "3 months before MCO",
                 "MCO Starts",
@@ -24,15 +31,18 @@ stocksUI <- function(id) {
         ),
         br(),
 
-        h2("KLSE"),
-        p(class = "lead",
-            "The FTSE Bursa Malaysia KLCI, also known as the FBM KLCI, is a capitalisation-weighted stock market index, composed of the 30 largest companies on the 
-            Bursa Malaysia by market capitalisation that meet the eligibility requirements of the FTSE Bursa Malaysia Index Ground Rules. The index is jointly operated 
-            by FTSE and Bursa Malaysia.",
-            br(),
-            "As indicated by KLSE stock, the stock market in Malaysia had been declining when covid-19 pandemic started, and took a deep hit 
-            right after MCO is announced."),
-        selectInput(ns("group"), 
+        h2("FBM KLCI"),
+        p(
+            a(href = "https://www.bursamalaysia.com/trade/our_products_services/indices/ftse_bursa_malaysia_indices/ftse_bursa_malaysia_klci", "FTSE Bursa Malaysia KLCI"),
+            " comprises the largest 30 companies listed on the Main Board by full market capitalisation that meet the eligibility requirements.
+            It was enhanced by Bursa Malaysia to ensure that it remains robust in measuring the national economy with growing linkage to the global economy.",
+            br(), br(),
+            "As could be seen from the stock trend, the stock market in Malaysia had been declining when covid-19 pandemic started, and took a deep hit 
+            around the time MCO is announced. After MCO, it has been slowly recovering.",
+            br(), br(),
+            strong("In the span of a week (11th March to 18 March 2020), the index drops by 14.19% (1443.83 to 1239.01).")
+        ),
+        selectInput(ns("groupKlse"), 
             label = "Show by", 
             choices = c(
                 "Daily" = "daily",
@@ -50,13 +60,21 @@ stocksUI <- function(id) {
                 DT::dataTableOutput(ns("klseTable"))
             )
         ),
+        br(),
 
-        h2("Aviation (Airasia)"),
-        p(class = "lead",
-            "One of the most badly impacted industry is aviation. We look at Malaysia's leading Low-Cost Carrier, Airasia.",
-            br(),
-            "The stock has been declining since beginning of 2020, and similarly took a deep hit right after MCO is announced. After MCO, the stock is still struggling."),
-        selectInput(ns("group"), 
+        h2("Aviation (AirAsia)"),
+        p(
+            "One of the most badly impacted industry is aviation / tourism, as many countries have closed their borders and people afraid to go oversea. 
+            We look at Malaysia's leading Low-Cost Carrier, ",
+            a(href = "https://www.airasia.com/", "AirAsia Berhad"),
+            ".",
+            br(), br(),
+            "The stock has been declining since beginning of 2020, and further plunged around the period MCO is announced. After MCO, the stock is still struggling. This 
+            is because oversea travels are still expected to be severely limited for the rest of this year.",
+            br(), br(),
+            strong("At it's lowest point at 19th March (0.52), the stock price is 30.77% as valuable compared to beginning of the year (1.69).")
+        ),
+        selectInput(ns("groupAirasia"), 
             label = "Show by", 
             choices = c(
                 "Daily" = "daily",
@@ -73,13 +91,17 @@ stocksUI <- function(id) {
                 plotOutput(ns("airasia")),
             )
         ),
+        br(),
 
         h2("Petroleum (Petronas)"),
-        p(class = "lead",
-            "Secondly, another badly impacted industry is petroleum. At some point of time, there was even negative oil price. We look at Malaysia's national oil and gas company, Petronas.",
-            br(),
-            "The stock has been declining since beginning of 2020, and similarly took a deep hit right after MCO is announced. After MCO, the stock is still struggling."),
-        selectInput(ns("group"), 
+        p(
+            "Secondly, another badly impacted industry is oil & gas, as MCO has kept people indoor. At some point of time, there was even news of ",
+            a(href = "https://www.bbc.com/news/business-52350082", "negative oil price in US"),
+            ". We look at Malaysia's national oil and gas company, Petronas Dagangan Berhad.",
+            br(), br(),
+            "The stock had been stable up until March, where it had a sharp decline. After MCO, it has been slowly recovering."
+        ),
+        selectInput(ns("groupPetronas"), 
             label = "Show by", 
             choices = c(
                 "Daily" = "daily",
@@ -95,18 +117,23 @@ stocksUI <- function(id) {
             div(class = "col-md-4",
                 DT::dataTableOutput(ns("petronasTable"))
             )
+        ),
+        br(),
+        br(),
+
+        p(class="blockquote-reverse",
+            "Data from ",
+            a(href = "https://finance.yahoo.com/", "Yahoo Finance"),
+            " using ",
+            a(href = "https://cran.r-project.org/web/packages/quantmod/index.html", "quantmod"),
+            " package"
         )
     )
 }
 
 stocks <- function(input, output, session) {
-    output$title <- renderText({
-        paste("Stocks : ", input$period[1], " - ", input$period[2])
-    })
-
     # Dictionary to map period label to actual represented date
     periodMaps <- c(
-        "1 year before MCO" = "2019-03-18",
         "6 months before MCO" = "2019-09-18",
         "3 months before MCO" = "2019-12-18",
         "MCO Starts" = "2020-03-18",
@@ -115,33 +142,33 @@ stocks <- function(input, output, session) {
     )
 
     # Load stock data from Yahoo Finance
-    allKlseStock <- getSymbols("^KLSE", src = "yahoo", from = "2019-03-18", to = as.character(Sys.Date()), auto.assign = FALSE);
-    allAirasiaStock <- getSymbols("5099.KL", src = "yahoo", from = "2019-03-18", to = as.character(Sys.Date()), auto.assign = FALSE);
-    allPetronasStock <- getSymbols("PGAS.KL", src = "yahoo", from = "2019-03-18", to = as.character(Sys.Date()), auto.assign = FALSE);
+    allKlseStock <- getSymbols("^KLSE", src = "yahoo", from = "2019-09-18", to = as.character(Sys.Date()), auto.assign = FALSE);
+    allAirasiaStock <- getSymbols("5099.KL", src = "yahoo", from = "2019-09-18", to = as.character(Sys.Date()), auto.assign = FALSE);
+    allPetronasStock <- getSymbols("PETR.KL", src = "yahoo", from = "2019-09-18", to = as.character(Sys.Date()), auto.assign = FALSE);
 
     # Filter & group stock data
     groupedKlseStock <- reactive({
         klseStock <- allKlseStock[paste(periodMaps[input$period[1]], "::", periodMaps[input$period[2]], sep="")];
 
-        if (input$group == "weekly") return(to.weekly(klseStock))
-        if (input$group == "monthly") return(to.monthly(klseStock))
-        if (input$group == "daily") return(to.daily(klseStock))
+        if (input$groupKlse == "weekly") return(apply.weekly(klseStock, mean))
+        if (input$groupKlse == "monthly") return(apply.monthly(klseStock, mean))
+        if (input$groupKlse == "daily") return(apply.daily(klseStock, mean))
     })
 
     groupedAirasiaStock <- reactive({
         airasiaStock <- allAirasiaStock[paste(periodMaps[input$period[1]], "::", periodMaps[input$period[2]], sep="")];
 
-        if (input$group == "weekly") return(to.weekly(airasiaStock))
-        if (input$group == "monthly") return(to.monthly(airasiaStock))
-        if (input$group == "daily") return(to.daily(airasiaStock))
+        if (input$groupAirasia == "weekly") return(apply.weekly(airasiaStock, mean))
+        if (input$groupAirasia == "monthly") return(apply.monthly(airasiaStock, mean))
+        if (input$groupAirasia == "daily") return(apply.daily(airasiaStock, mean))
     })
 
     groupedPetronasStock <- reactive({
         petronasStock <- allPetronasStock[paste(periodMaps[input$period[1]], "::", periodMaps[input$period[2]], sep="")];
 
-        if (input$group == "weekly") return(to.weekly(petronasStock))
-        if (input$group == "monthly") return(to.monthly(petronasStock))
-        if (input$group == "daily") return(to.daily(petronasStock))
+        if (input$groupPetronas == "weekly") return(apply.weekly(petronasStock, mean))
+        if (input$groupPetronas == "monthly") return(apply.monthly(petronasStock, mean))
+        if (input$groupPetronas == "daily") return(apply.daily(petronasStock, mean))
     })
 
     # Graph Outputs
@@ -157,7 +184,7 @@ stocks <- function(input, output, session) {
             TA = paste0("addLines(v=", dayToMCO, ", col='red')")
         )
 
-        if (input$group == "daily") {
+        if (input$groupKlse == "daily") {
             addBBands(); addVo(); addMACD();
         }
     })
@@ -174,7 +201,7 @@ stocks <- function(input, output, session) {
             TA = paste0("addLines(v=", dayToMCO, ", col='red')")
         )
 
-        if (input$group == "daily") {
+        if (input$groupAirasia == "daily") {
             addBBands(); addVo(); addMACD();
         }
     })
@@ -191,21 +218,21 @@ stocks <- function(input, output, session) {
             TA = paste0("addLines(v=", dayToMCO, ", col='red')")
         )
 
-        if (input$group == "daily") {
+        if (input$groupPetronas == "daily") {
             addBBands(); addVo(); addMACD();
         }
     })
 
     # Table Outputs
     output$klseTable = DT::renderDataTable({
-        as.data.frame(groupedKlseStock())['klseStock.Close']
-    }, colnames = c("Closing Price"))
+        as.data.frame(groupedKlseStock())['KLSE.Close']
+    }, colnames = c("Closing Price"), options = list(pageLength = 7))
 
     output$airasiaTable = DT::renderDataTable({
-        as.data.frame(groupedAirasiaStock())['airasiaStock.Close']
-    }, colnames = c("Closing Price"),)
+        as.data.frame(groupedAirasiaStock())['5099.KL.Close']
+    }, colnames = c("Closing Price"), options = list(pageLength = 7))
 
     output$petronasTable = DT::renderDataTable({
-        as.data.frame(groupedPetronasStock())['petronasStock.Close']
-    }, colnames = c("Closing Price"),)
+        as.data.frame(groupedPetronasStock())['PETR.KL.Close']
+    }, colnames = c("Closing Price"), options = list(pageLength = 7))
 }
