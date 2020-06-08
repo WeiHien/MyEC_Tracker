@@ -1,43 +1,80 @@
-library(readxl)
+library(shiny)
+library(ggplot2)
+library(plotly)
+library(tidyr)
+library(dplyr)
 
-gdpGrowth <- as.data.frame(read_excel("data/imf-real-gdp-growth.xls"))
-gdpGrowth <- gdpGrowth[,c("Real GDP growth (Annual percent change)", "2016", "2017", "2018", "2019", "2020")]
-names(gdpGrowth)[names(gdpGrowth) == 'Real GDP growth (Annual percent change)'] <- 'Region'
-gdpGrowth <- gdpGrowth[complete.cases(gdpGrowth),]
-
+mev <- as.data.frame(read.csv("data/Compilation of Economy Factors.csv",stringsAsFactors = FALSE))
+mev$Year <- as.Date(c(mev$Year),format="%m/%d/%Y")
+factor <- list("Consumer Price Index", "Weighted Average Lending Rate", "Exchange Rate (USD)")
 
 financeUI <- function(id) {
-    ns <- NS(id)
+  ns <- NS(id)
+  
+  fluidPage(
+    titlePanel("Economic Factors"),
     
-    fluidPage(
-        titlePanel("Finance"),
+    sidebarLayout(
+      sidebarPanel(
+        # Filter of economic factors
+        selectInput(ns("factorinput"), 
+                    label = "Economic Factor", 
+                    choices = c("Consumer Price Index", 
+                                "Weighted Average Lending Rate", 
+                                "Exchange Rate (USD)"),
+                    selected = "Consumer Price Index"),
+        
+        # Date range for the time serios
+        sliderInput(ns("Year"),
+                    label = "Date Range",
+                    min = min(mev$Year),
+                    max = max(mev$Year),
+                    value = c(min(mev$Year),max(mev$Year)),
+                    timeFormat="%b %Y"),
+      ),
+      
+      mainPanel(
+        p(class = "lead", "To illustrate the economic impact, the chart below presents various key economic factors"),
+        
+        textOutput(ns("desc")),
+        br(),
 
-        sidebarLayout(
-            sidebarPanel(
-                selectInput(ns("region"), 
-                    label = "Real GDP Growth by region", 
-                    choices = gdpGrowth["Region"],
-                    selected = "Malaysia"
-                ),
-            ),
+        plotlyOutput(ns("distplot")),
+        br(),
 
-            mainPanel(
-                plotOutput(ns("gdpGrowth")),
-            ),
-        ),
-    )
+        p(class="blockquote-reverse",
+            "Data from ",
+            a(href = "https://www.bnm.gov.my/index.php?ch=statistic_nsdp&pg=statistic_nsdp_labor_unemp_mth&lang=en", "Bank Negara Malaysia")
+        )
+      ),
+    ),
+  )
 }
 
-finance <- function(input, output, session) {
-    output$gdpGrowth <- renderPlot({
-        plot(c("2016", "2017", "2018", "2019", "2020"), 
-            gdpGrowth[gdpGrowth["Region"] == input$region, c("2016", "2017", "2018", "2019", "2020")], 
-            type="l",
-            main=input$region,
-            xlab="Year",
-            ylab="Real GDP Growth",
-            ylim=c(-10, 10)
-        )
-        abline(h=0, lty=2, col="red")
-    })
+finance <- function(input, output,session) {
+  output$desc <- renderText({
+    desc <- switch(input$factorinput, 
+      "Consumer Price Index" = "Similar to Consumer Price Index, due to the order released by government, CPI has dropped from February to March, 122.4 to 120.9
+         respectively.",
+      "Weighted Average Lending Rate" = "Weighted Average Lending Rate was remaining stable at around 5.2% during second half of Year 2019 nevertheless it started 
+        to fell at January 2020 and by far, March 2020 has the lowest lending rate, i.e. 4.8% over 5 years.",
+      "Exchange Rate (USD)" = "")
+
+    desc
+  })
+
+  dat <- reactive({
+    mev[mev$Year %in% seq(from=min(input$Year[1]),to=max(input$Year[2]),by=1),]
+  })
+
+  output$distplot <- renderPlotly({ 
+    data <- switch(input$factorinput, 
+      "Consumer Price Index" = dat()$Consumer.Price.Index,
+      "Weighted Average Lending Rate" = dat()$Weighted.Average.Lending.Rate,
+      "Exchange Rate (USD)" = dat()$Exchange.Rate..USD.,)
+    
+    p <- ggplot(dat(), aes_string(x=dat()$Year, y=data))
+    p <- p + ggtitle(input$factorinput) + geom_line(color = 'red')+ geom_point(color = 'red')
+    ggplotly(p)
+  })
 }
