@@ -64,7 +64,10 @@ finance <- function(input, output,session) {
   })
 
   dat <- reactive({
-    mev[mev$Year %in% seq(from=min(input$Year[1]),to=max(input$Year[2]),by=1),]
+    mev = mev[mev$Year %in% seq(from=min(input$Year[1]),to=max(input$Year[2]),by=1),]
+    mev$Year <- as.Date(format(as.Date(mev$Year, "%Y-%m-%d"), "%Y-%m-01"))
+    mev$Month <- format(mev$Year,"%B %Y")
+    mev
   })
 
   output$distplot <- renderPlotly({ 
@@ -72,9 +75,10 @@ finance <- function(input, output,session) {
       "Consumer Price Index" = dat()$Consumer.Price.Index,
       "Weighted Average Lending Rate" = dat()$Weighted.Average.Lending.Rate,
       "Exchange Rate (USD)" = dat()$Exchange.Rate..USD.,)
+    interval <- ceiling(nrow(dat()) / 10)
     
-    p <- ggplot(dat(), aes_string(x=dat()$Year, y=data))
-    p <- p + ggtitle(input$factorinput) + geom_line(color = 'red')+ geom_point(color = 'red')
-    ggplotly(p)
+    p <- ggplot(dat(), aes_string(x=dat()$Year, y=data, Period="Month", Value=data, group=1)) + ggtitle(input$factorinput) + geom_line(color = 'red') + geom_point(color = 'red') + xlab("Month") + ylab(input$factorinput) + 
+      scale_x_date(date_breaks = paste(interval, "month"), date_labels = "%b %Y")
+    ggplotly(p, tooltip=c("Period", "Value"))
   })
 }

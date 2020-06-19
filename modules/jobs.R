@@ -52,18 +52,22 @@ jobs <- function(input, output,session) {
   rownames(mev) <- format(mev$Year,"%B %Y")
 
   dat <- reactive({
-    mev[mev$Year %in% seq(from=min(input$Year[1]),to=max(input$Year[2]),by=1),]
+    mev <- mev[mev$Year %in% seq(from=min(input$Year[1]),to=max(input$Year[2]),by=1),]
+    mev$Year <- as.Date(format(as.Date(mev$Year, "%Y-%m-%d"), "%Y-%m-01"))
+    mev$Month <- row.names(mev)
+    mev
   })
 
   output$distplot <- renderPlotly({ 
     data <- dat()$Unemployment
-    
-    p <- ggplot(dat(), aes_string(dat()$Year, data))
-    p <- p +  geom_line(color = 'red')+ geom_point(color = 'red')
-    ggplotly(p)
+    interval <- ceiling(nrow(dat()) / 10)
+
+    p <- ggplot(dat(), aes_string(dat()$Year, data, Period="Month", "Rate (%)"=data, group=1)) + geom_line(color = 'red') + geom_point(color = 'red') + 
+      xlab("Month") + ylab("Unemployment Rate (%)") + scale_x_date(date_breaks = paste(interval, "month"), date_labels = "%b %Y")
+    ggplotly(p, tooltip=c("Period", "Rate (%)"))
   })
 
   output$unemploymentTable = DT::renderDataTable({
-    dat()['Unemployment.Rate....']
+    dat()[rev(order(dat()$Year)),]['Unemployment.Rate....']
   }, colnames = c("Unemployment Rate (%)"))
 }
