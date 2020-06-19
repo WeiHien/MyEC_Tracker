@@ -42,6 +42,7 @@ ui <- navbarPage(
 
 # Define Server logic ----
 server <- function(input, output, session) {
+    callModule(module = home, id = "home")
     callModule(module = jobs, id = "jobs")
     callModule(module = finance, id = "finance")
     callModule(module = stocks, id = "stocks")
