@@ -15,7 +15,7 @@ homeUI <- function(id) {
                 tags$link(rel = "stylesheet", type = "text/css", href = "css/home.css")
             ),
 
-            h1(class = "text-center", "CoronaJob"),
+            h1(class = "text-center", "MyEC Tracker"),
             h3(class = "text-center", "An analysis on economic & financial impacts of COVID-19 towards Malaysia"),
 
             div(class = "row mt-16",

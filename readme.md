@@ -1,17 +1,17 @@
-# CoronaJob
+# MyEC Tracker
 
 ## To run directly from GitHub:
 ```R
 # R console
 library(shiny)
 
-runGitHub( "coronajob", "WeiHien")
+runGitHub( "MyEC_Tracker", "WeiHien")
 ```
 
 ## To run locally and contribute:
 - Clone the repo
 ```
-git clone https://github.com/WeiHien/coronajob.git
+git clone https://github.com/WeiHien/MyEC_Tracker.git
 ```
 
 - Run the app locally
@@ -19,7 +19,7 @@ git clone https://github.com/WeiHien/coronajob.git
 # R console
 library(shiny)
 
-runApp( "coronajob")
+runApp( "MyEC_Tracker")
 ```
 
 - Switch to new Git branch before making changes

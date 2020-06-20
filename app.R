@@ -14,9 +14,9 @@ ui <- navbarPage(
     inverse = TRUE,
     title = div(
         icon("line-chart"),
-        "CoronaJob"
+        "MyEC Tracker"
     ),
-    windowTitle = "CoronaJob",
+    windowTitle = "MyEC Tracker",
 
     # Homepage ----
     tabPanel("Home", homeUI(id = "home")),
