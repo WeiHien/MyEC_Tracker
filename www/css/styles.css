@@ -29,3 +29,7 @@
 .mb-16 {
     margin-bottom: 4rem;
 }
+
+.font-black.small {
+    color: black;
+}

@@ -6,6 +6,7 @@ library(dplyr)
 
 mev <- as.data.frame(read.csv("data/Compilation of Economy Factors.csv",stringsAsFactors = FALSE))
 mev$Year <- as.Date(c(mev$Year),format="%m/%d/%Y")
+mev <- subset(mev, Year >= as.Date("2018-01-01") )
 factor <- list("Consumer Price Index", "Weighted Average Lending Rate", "Exchange Rate (USD)")
 
 financeUI <- function(id) {
@@ -27,7 +28,7 @@ financeUI <- function(id) {
         # Date range for the time serios
         sliderInput(ns("Year"),
                     label = "Date Range",
-                    min = min(mev$Year),
+                    min = as.Date("2018-01-01"),
                     max = max(mev$Year),
                     value = c(as.Date("2019-01-31"),max(mev$Year)),
                     timeFormat="%b %Y"),

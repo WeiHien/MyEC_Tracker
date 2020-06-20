@@ -107,7 +107,12 @@ homeUI <- function(id) {
                 ),
             ),
 
-            h3(class = "text-center mb-8", "Cumulative Confirmed Case of Each State in Malaysia"),
+            h3(class = "text-center mb-8", 
+                "Cumulative Confirmed Case of Each State in Malaysia", 
+                span(class = "small font-black", 
+                    paste0("(by ", last(data.raw)$date, ")")
+                )
+            ),
             div(class="row mb-16",
                 div(class = "col-md-6",
                     plotlyOutput(ns("cumulativePlot")),
@@ -288,5 +293,5 @@ home <- function(input, output, session) {
 
     output$cumulativeTable = DT::renderDataTable({
         data_state[rev(order(data_state$date)),]
-    }, rownames = FALSE, colnames = c("Date", "State", "Total Cases", "Total Deaths"))
+    }, rownames = FALSE, colnames = c("Date", "State", "Cumulative Cases", "Cumulative Deaths"))
 }
