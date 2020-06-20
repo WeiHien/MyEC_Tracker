@@ -28,7 +28,14 @@ homeUI <- function(id) {
                                 "Confirmed Cases"
                             )
                         ),
-                        div(class="panel-body", h4(last(data.raw)$total_cases))
+                        div(class="panel-body", 
+                            h4(
+                                last(data.raw)$total_cases, 
+                                span(class = "small", 
+                                    paste0("(", last(data.raw)$date, ")")
+                                )
+                            ),
+                        )
                     )
                 ),
 
@@ -41,7 +48,14 @@ homeUI <- function(id) {
                                 "Active Cases"
                             )
                         ),
-                        div(class="panel-body", h4(last(data.raw)$active_cases))
+                        div(class="panel-body", 
+                            h4(
+                                last(data.raw)$active_cases, 
+                                span(class = "small", 
+                                    paste0("(", last(data.raw)$date, ")")
+                                )
+                            ),
+                        )
                     )
                 ),
                 
@@ -54,7 +68,14 @@ homeUI <- function(id) {
                                 "Recovered Cases"
                             )
                         ),
-                        div(class="panel-body", h4(last(data.raw)$total_recover))
+                        div(class="panel-body", 
+                            h4(
+                                last(data.raw)$total_recover, 
+                                span(class = "small", 
+                                    paste0("(", last(data.raw)$date, ")")
+                                )
+                            ),
+                        )
                     ),
                 ),
 
@@ -67,7 +88,14 @@ homeUI <- function(id) {
                                 "Death Cases"
                             )
                         ),
-                        div(class="panel-body", h4(last(data.raw)$total_deaths))
+                        div(class="panel-body", 
+                            h4(
+                                last(data.raw)$total_deaths, 
+                                span(class = "small", 
+                                    paste0("(", last(data.raw)$date, ")")
+                                )
+                            ),
+                        )
                     ),
                 ),
             ),

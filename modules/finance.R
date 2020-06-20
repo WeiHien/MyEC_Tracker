@@ -29,7 +29,7 @@ financeUI <- function(id) {
                     label = "Date Range",
                     min = min(mev$Year),
                     max = max(mev$Year),
-                    value = c(min(mev$Year),max(mev$Year)),
+                    value = c(as.Date("2019-01-31"),max(mev$Year)),
                     timeFormat="%b %Y"),
       ),
       
