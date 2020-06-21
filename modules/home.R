@@ -16,6 +16,7 @@ homeUI <- function(id) {
             ),
 
             h1(class = "text-center", "MyEC Tracker"),
+            h4(class = "text-center", em("(Malaysia's Economics & COVID19 Tracker)")),
             h3(class = "text-center", "An analysis on economic & financial impacts of COVID-19 towards Malaysia"),
 
             div(class = "row mt-16",
