@@ -1,5 +1,7 @@
 # MyEC Tracker
 
+A Shiny app to illustrate the economics impacts of COVID-19 outbreak to Malaysia
+
 ## To run directly from GitHub:
 ```R
 # R console
