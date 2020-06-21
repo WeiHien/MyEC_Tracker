@@ -15,7 +15,7 @@ jobsUI <- function(id) {
   fluidPage(
     titlePanel("Unemployment Rate"),
     p(class = "lead",
-      "For insight on job market impact, let's look at the monthly unemployment rate. Unemployment rate was peaked at March 2020, i.e. 3.9% over 5 years. It is highly related 
+      "For insight on job market impact, let's look at the monthly unemployment rate. Unemployment rate was peaked at April 2020, i.e. 5.0% over 5 years. It is highly related 
       to government decision on release the Movement Control Order at 16 March 2020."
     ),
     br(),

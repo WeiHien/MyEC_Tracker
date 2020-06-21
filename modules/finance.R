@@ -55,7 +55,7 @@ financeUI <- function(id) {
 finance <- function(input, output,session) {
   output$desc <- renderText({
     desc <- switch(input$factorinput, 
-      "Consumer Price Index" = "Similar to Consumer Price Index, due to the order released by government, CPI has dropped from February to March, 122.4 to 120.9
+      "Consumer Price Index" = "Similar to Consumer Price Index, due to the order released by government, CPI has dropped from February to April, 122.4 to 117.6
          respectively.",
       "Weighted Average Lending Rate" = "Weighted Average Lending Rate was remaining stable at around 5.2% during second half of Year 2019 nevertheless it started 
         to fell at January 2020 and by far, March 2020 has the lowest lending rate, i.e. 4.8% over 5 years.",
