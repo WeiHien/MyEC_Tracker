@@ -1,1 +1,3 @@
-rpubs/presentation.html
+rpubs/*.html
+rpubs/*.md
+rpubs/rsconnect

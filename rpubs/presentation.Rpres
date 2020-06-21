@@ -1,0 +1,75 @@
+Malaysia Economics & Coronavirus Tracker (MyEC Tracker)
+========================================================
+author: Group A - Principle of Data Science
+date: 22 June 2020
+autosize: true
+
+__Group members:__  
+Ang Lin Siang – 17174507  
+Cheong Wei Hien – 17218461  
+Lai Hoi Yee – 17218659  
+Ng Keat Zhao - 17217743
+
+Motivation
+========================================================
+type: prompt
+incremental: true
+
+The outbreak of a novel pandemic across worldwide countries, which is __COVID-19__, has become a global concern amongst people today.  
+  
+Most of the information regarding this pandemic outbreak is solely came from _News Article_ and _Report_. Although some visualization dashboards for COVID-19 pandemic are created recently, but there is less or no one has visualized it in the context of its __impact to economic factors__ especially in case of Malaysia, such as the comparison between before and after the outbreak.  
+  
+Thereby, this project aims to bring some insights to public society regarding these 2 questions:  
+- __How is the overall review of the COVID-19 cases in Malaysia?__
+- __What are the economics impacts to Malaysia due to COVID-19 outbreak?__
+
+Data Source
+========================================================
+
+Various data are collected and analysed from various aspects in order to gain overview on the spread of COVID-19 in Malaysia and its economics impact:
+- Case Tracker (up ) -  (Source: [_Data World - Ariff Wan Nor_](https://data.world/wnarifin/covid-19-my/workspace/file?filename=covid-19_my_full.csv))
+- Job Market - (Source: [_Bank Negara Malaysia_](https://www.bnm.gov.my/index.php?ch=statistic_nsdp&pg=statistic_nsdp_labor_unemp_mth&lang=en))
+- Key Economics Index - (Source: [_Bank Negara Malaysia_](https://www.bnm.gov.my/index.php?ch=statistic_nsdp&pg=statistic_nsdp_labor_unemp_mth&lang=en))
+- Stock Market - (Source: [_Yahoo Finance_](https://finance.yahoo.com/) via [_quantmod_](https://cran.r-project.org/web/packages/quantmod/index.html))
+
+Screenshot of the general view of the apps built as below:  
+![app-screenshot](app-screenshot.jpg)
+
+Process & Links
+========================================================
+title: false
+
+## Data Science Process
+
+_Step 1 – Ask an interesting question:_  
+__What are the economics impacts to Malaysia due to COVID-19 outbreak?__  
+  
+_Step 2 – Get the data:_  
+__The data are obtained from various sources as shown in the previous slide.__  
+  
+_Step 3 – Explore the data:_  
+__R studio is used to understand, integrate and clean the data.__  
+  
+_Step 4 – Communicate and visualize the results:_  
+__The interactive dashboard is built on Shiny to provide some insights regarding COVID-19 pandemic to users.__  
+  
+## Project Links
+The source code of the Shiny application can be accessed through: [GitHub](https://github.com/WeiHien/MyEC_Tracker)  
+Access link of Shiny application : [shinyapps.io](https://group-a-principle-data-science.shinyapps.io/myec-tracker/)  
+Access link of presentation video : [Youtube]()
+
+Observations & Challenges
+========================================================
+title: false
+
+## Interesting Observations 
+- On April 2020, Malaysia’s unemployment rate spikes to __5%__, the highest in 30 years.
+
+- All of the economics factors (limited to 3 factors) of Malaysia studied in this apps have experienced a __significant negative impact__ after the spread of COVID-19 pandemic.
+
+- Malaysia’s [FTSE Bursa Malaysia KLCI](https://www.bursamalaysia.com/trade/our_products_services/indices/ftse_bursa_malaysia_indices/ftse_bursa_malaysia_klci) stock index has experienced a __significant drop__ during March 2020 when the media announced the outbreak of COVID-19 in Malaysia. However, the confident of market started to __recover steadily__ after the government of Malaysia has taken some immediate actions to curb the spread of COVID-19 such as Movement Control Order (MCO).
+
+## Challenges on this project
+- Lack of complete data source 
+- Lack of coding experience in Shiny application
+- Integration of multiple knowledge and knowledge are required
