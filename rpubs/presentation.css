@@ -6,3 +6,13 @@
 .reveal ul li {
     font-size: 0.8em;
 }
+
+.reveal h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.reveal .slides section .slideContent h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
