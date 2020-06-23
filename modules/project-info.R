@@ -8,7 +8,18 @@ projectInfoUI <- function(id) {
             ),
             br(), br(),
 
-            h3(class = "text-primary", "Background"),
+            h3(class = "text-primary", "Section"),
+            a(href = "#background-section", "A. Background"), br(),
+            a(href = "#quick-explanation-section", "B. Quick Explanation"), br(),
+            a(href = "#observation-section", "C. Interesting Observation"), br(),
+            a(href = "#guideline-section", "D. User Guideline"), br(),
+            a(href = "#data-timeframe-section", "E. Data Timeframe"), br(),
+            a(href = "#experience-section", "F. Summary of Experiences"), br(),
+            a(href = "#project-link-section", "G. Relevent Project Link"), br(),
+            a(href = "#reference-section", "H. References"), br(),
+            br(), br(),
+
+            h3(class = "text-primary", "Background", id = "background-section"),
             br(),
 
             p(class="lead", "The outbreak of a novel pandemic across worldwide countries, which is COVID-19, has become a global concern amongst 
@@ -22,8 +33,11 @@ projectInfoUI <- function(id) {
             economics in Malaysia."),
             br(), br(),
 
-            h3(class = "text-primary", "Quick Explanation"),
+            h3(class = "text-primary", "Quick Explanation", id = "quick-explanation-section"),
             br(),
+
+            p(class="lead", strong("COVID-19"), " - Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus. 
+            Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment."),
 
             p(class="lead", strong("Unemployment Rate (UR)"), " - Unemployment rate is the share of the labour force that is jobless, expressed as a percentage. 
             This can used to assess the economics situation of a country."),
@@ -44,7 +58,7 @@ projectInfoUI <- function(id) {
             p(em("**Note: All of the definitions above are taken from",  strong("\"Investopedia\"."))),
             br(), br(),
 
-            h3(class = "text-primary", "Interesting Observation Found"),
+            h3(class = "text-primary", "Interesting Observation Found", id = "observation-section"),
             br(),
 
             p(class="lead", "1. As shown on the chart, all of the economics factors (limited to 4 factors) of Malaysia analysed in this app 
@@ -62,7 +76,7 @@ projectInfoUI <- function(id) {
             using airline (limited space within)."),
             br(), br(),
 
-            h3(class = "text-primary", "User Guideline"),
+            h3(class = "text-primary", "User Guideline", id = "guideline-section"),
             br(),
 
             div(img(class = "img-responsive center-block", src = "images/table-functions.png", style="height: 50px")),
@@ -80,7 +94,7 @@ projectInfoUI <- function(id) {
             p(class="lead", "Whenever you see this kind of “slider bar”,  it allows you to select a range of date that you are interested in."),
             br(), br(),
 
-            h3(class = "text-primary", "Data timeframe"),
+            h3(class = "text-primary", "Data timeframe", id = "data-timeframe-section"),
             br(),
 
             p(class="lead", "- The Malaysia’s COVID-19 data used in this app is from January 2020 until 15 June 2020 only. This is due to a lack of 
@@ -91,6 +105,42 @@ projectInfoUI <- function(id) {
 
             p(class="lead", "- The stock index in this app will keep pulling the latest data from the application software interface (API) if the 
             users slide the timeframe available to “now”."),
+            br(), br(),
+
+            h3(class = "text-primary", "Summary of Experiences", id = "experience-section"),
+            br(),
+
+            p(class="lead", "- From this project, we learned how to build a basic Shiny application from scratch, with limited knowledge at initial."),
+
+            p(class="lead", "- Due to lack of accessibility and completeness of data sources, we have to narrow down our coverage to only Malaysia."),
+
+            p(class="lead", "- After this project, we have become more familiar with the data science pipeline and its application."),
+
+            p(class="lead", "- Additionally, we have improved our coding knowledge and skills."),
+            br(), br(),
+
+            h3(class = "text-primary", "Relevant Project Links", id = "project-link-section"),
+            br(),
+
+            p(class="lead", "Source Code: ", a(href="https://github.com/WeiHien/MyEC_Tracker", icon("github"), "GitHub")),
+            p(class="lead", "Presentation Video: "),
+            div(class = "embed-responsive embed-responsive-16by9",
+                HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/VEnJuBfBzGA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+            ),
+            br(), br(),
+
+            h3(class = "text-primary", "References", id = "reference-section"),
+            br(),
+
+            p("1. Calculating the weighted average interest rate. (2020). In accountingtools. Retrieved June 15, 2020, from https://www.accountingtools.com/articles/calculating-the-weighted-average-interest-rate.html"),
+            p("2. Chen, J. (2020, January 31). Exchange Rate Definition. Retrieved June 15, 2020, from https://www.investopedia.com/terms/e/exchangerate.asp"),
+            p("3. Chappelow, J. (2020, February 1). Unemployment Rate. Retrieved June 15, 2020, from https://www.investopedia.com/terms/u/unemploymentrate.asp"),
+            p("4. Chen, J. (2020, April 23). Consumer Price Index (CPI). Retrieved June 15, 2020, from https://www.investopedia.com/terms/c/consumerpriceindex.asp"),
+            p("5. Chen, J. (2020, May 24). Index. Retrieved June 15, 2020, from https://www.investopedia.com/terms/i/index.asp"),
+            p("6. COVID-19 Outbreak Live Updates. (n.d.). Retrieved June 15, 2020, from https://www.outbreak.my/"),
+            p("7. Learn Shiny. (n.d.). Retrieved June 15, 2020, from https://shiny.rstudio.com/tutorial/"),
+            p("8. RStudio Support. (2020, June 11). Authoring R Presentations. Retrieved June 15, 2020, from https://support.rstudio.com/hc/en-us/articles/200486468-Authoring-R-Presentations"),
+            p("9. World Health Organization. (n.d.). Coronavirus. Retrieved June 15, 2020, from https://www.who.int/health-topics/coronavirus#tab=tab_1"),
             br(), br(),
         )
     )

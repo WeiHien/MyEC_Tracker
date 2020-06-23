@@ -9,8 +9,9 @@ aboutProjectUI <- function(id) {
             br(), br(),
 
             p(class = "lead", 
-                "Amid the global pandemic of COVID-19, we would like to seek for an insight about this,"
+                "Amid the global pandemic of COVID-19, we would like to seek for an insight about this:"
             ),
+            br(),
 
             h2(class = "text-center text-primary", 
                 em("What are the economical impacts?")
