@@ -1,6 +1,6 @@
 # MyEC Tracker
 
-A Shiny app to illustrate the economics impacts of COVID-19 outbreak to Malaysia
+A Shiny app to illustrate the economics impacts of COVID-19 outbreak to Malaysia (https://group-a-principle-data-science.shinyapps.io/myec-tracker)
 
 ## To run directly from GitHub:
 ```R
