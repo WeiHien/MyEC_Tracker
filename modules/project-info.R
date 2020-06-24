@@ -125,7 +125,7 @@ projectInfoUI <- function(id) {
             p(class="lead", "Source Code: ", a(href="https://github.com/WeiHien/MyEC_Tracker", icon("github"), "GitHub")),
             p(class="lead", "Presentation Video: "),
             div(class = "embed-responsive embed-responsive-16by9",
-                HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/VEnJuBfBzGA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+                HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/C6BKrsEcLYI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
             ),
             br(), br(),
 
