@@ -55,7 +55,7 @@ projectInfoUI <- function(id) {
             p(class="lead", strong("Stock Index (SI)"), " - SI is a method used to measure the performance of a basket of securities intended to 
             replicate a certain area of the market."),
 
-            p(em("**Note: All of the definitions above are taken from",  strong("\"Investopedia\"."))),
+            p(em("**Note: All of the definitions above are taken from",  strong("\"Investopedia\","), " except COVID-19 from World Health Organization (WHO).")),
             br(), br(),
 
             h3(class = "text-primary", "Interesting Observation Found", id = "observation-section"),

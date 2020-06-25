@@ -5,6 +5,6 @@ account: group-a-principle-data-science
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2482406
-bundleId: 3298571
+bundleId: 3315501
 url: https://group-a-principle-data-science.shinyapps.io/myec-tracker/
-when: 1592753741.01385
+when: 1593094271.44176
